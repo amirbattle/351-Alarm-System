@@ -23,6 +23,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
+-- Inputs and Outputs
 entity Alarm_System is
   Port ( clk, btn : IN std_logic;
          input : IN std_logic_vector(3 downto 0);
