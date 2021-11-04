@@ -34,6 +34,7 @@ entity Alarm_System is
 end Alarm_System;
 
 architecture Behavioral of Alarm_System is
+  
 
 
 -- Debounced pulse code
