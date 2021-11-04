@@ -26,7 +26,7 @@ use IEEE.NUMERIC_STD.ALL;
 -- Inputs and Outputs
 entity Alarm_System is
   Port ( clk, btn : IN std_logic;
-         input : IN std_logic_vector(3 downto 0);
+         inputs : IN std_logic_vector(3 downto 0);
          sensor : IN std_logic;
          speaker : OUT std_logic;
          LED : OUT std_logic_vector(6 downto 0);
