@@ -75,7 +75,7 @@ begin
                     ticks <= ticks + 1;
                 end if;
             else
-                en_count <= '0';
+                en_count <= '0'; ticks <= 0;
             end if;
         end if;
     end process;     
