@@ -2,6 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
+
 -- Inputs and Outputs
 entity Alarm_System is
   Port ( clk, btn : IN std_logic;
@@ -53,15 +54,31 @@ signal press : std_logic;
 signal counter : std_logic_vector(7 downto 0) := "11111111";
 signal rst_count: std_logic := '0';
 signal en_count: std_logic := '0';
+signal ticks : integer; -- Signal for counting clock periods
 
 begin
 
-    en_count <= is_on;
     rst_count <= '1' when press = '1' and inputs = "1011" else '0';
 
     btn_pulse_inst: button_pulse port map(CLK => clk, BTNC => btn, DB => press);
     timer_count_inst: timer_countdown port map (clk => clk, rst => rst_count, en => en_count, counter => counter);
     sev_seg_inst: sev_seg port map(clk => clk, d0 => counter(3 downto 0), d1 => counter(7 downto 4), is_on => is_on, LED => LED, AN => anode);
+    
+    process(pir)
+    begin
+        if rising_edge(clk) then
+            if pir = '1' then
+                if ticks = 5e6 - 1 then
+                    en_count <= pir; ticks <= 0;
+                    
+                else
+                    ticks <= ticks + 1;
+                end if;
+            end if;
+        end if;
+    end process;     
+                    
+                 
     
     process(counter)
     begin
@@ -71,5 +88,4 @@ begin
             buzzer <= '0';
         end if;
     end process;
-
 end Behavioral;
