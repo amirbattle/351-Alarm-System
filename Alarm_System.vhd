@@ -64,7 +64,7 @@ begin
     timer_count_inst: timer_countdown port map (clk => clk, rst => rst_count, en => en_count, counter => counter);
     sev_seg_inst: sev_seg port map(clk => clk, d0 => counter(3 downto 0), d1 => counter(7 downto 4), is_on => is_on, LED => LED, AN => anode);
     
-    process(pir)
+    process(clk)
     begin
         if rising_edge(clk) then
             if pir = '1' then
@@ -74,6 +74,8 @@ begin
                 else
                     ticks <= ticks + 1;
                 end if;
+            else
+                en_count <= '0';
             end if;
         end if;
     end process;     
