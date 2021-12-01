@@ -94,8 +94,8 @@ begin
     process(clk, rst_count)
     begin
         if rising_edge(clk) and is_actually_on = '1' then
-            if ticks = 1999999 then
-                if pir_pos_ticks > 1499999 then
+            if ticks = 199999999 then
+                if pir_pos_ticks > 149999999 then
                     en_count <= '1';
                 end if;
                 
