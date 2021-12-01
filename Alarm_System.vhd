@@ -10,7 +10,8 @@ entity Alarm_System is
          pir : IN std_logic;
          buzzer_out : OUT std_logic;
          LED : OUT std_logic_vector(6 downto 0);
-         anode : OUT std_logic_vector(3 downto 0)
+         anode : OUT std_logic_vector(3 downto 0);
+         LED1 : OUT std_logic
        );   
 end Alarm_System;
 
@@ -68,6 +69,7 @@ signal pir_pos_ticks : integer range 0 to 1999999 := 0; -- Signal for counting c
 
 begin
     
+    Led1 <= pir;
     rst_count <= '1' when press = '1' and inputs = "1011" else '0';
     is_actually_on <= '1' when is_on = '1' or en_count = '1' or trigger_buzzer = '1' else '0';
 
